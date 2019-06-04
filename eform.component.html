@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Form</h1>
+  <form #eform="ngForm" novalidate>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" required #firstname="ngModel" [(ngModel)]="model.firstname" name="firstname">
+      <span class="help-block" *ngIf="firstname.invalid && firstname.touched" style = "color:rgba(255, 0, 0, 0.637);">*Firstname is required</span>
+
+  </div>
+
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" required #lastname="ngModel" [(ngModel)]="model.lastname" name="lastname">
+      <span class="help-block" *ngIf="lastname.invalid && lastname.touched" style = "color:rgba(255, 0, 0, 0.637);">*Lastname is required</span>
+    </div>
+
+
+    <div class="form-group">
+      <label for="email">Email id</label>
+      <input type="text" class="form-control" id="email" required [email] = "true" #email="ngModel" [(ngModel)]="model.email" name="email" >
+      <span class="help-block" *ngIf="model.email=='' && email.touched" style = "color:rgba(255, 0, 0, 0.637);">*Email is required</span>
+      <span class="help-block" *ngIf="email.invalid && email.touched" style = "color:rgba(255, 0, 0, 0.637);">Invalid Email</span>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone No.</label>
+      <input type="number"  class="form-control" id="phone" required maxlength="10" #phone="ngModel" [(ngModel)]="model.phone"   name="phone">
+      <span class="help-block" *ngIf="model.phone>9999999999" style = "color:rgba(255, 0, 0, 0.637);">Please enter your 10 digit phone number </span>
+      <span class="help-block" *ngIf="phone.invalid && phone.touched" style = "color:rgba(255, 0, 0, 0.637);">*Phone number is required</span>
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select class="form-control" id="gender" required [(ngModel)]="model.gender" name="gender">
+        <option *ngFor="let gen of gender" [value]="gen">{{gen}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+    <button class="btn btn-success" (click)="onSubmit(eform)" [disabled]="!eform.form.valid">Submit</button>
+    </div>
+  </form>
+</div>
